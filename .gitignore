@@ -3,3 +3,8 @@
 
 # python bytecode files
 *.pyc
+
+# build files
+build/
+dist/
+sudokuer.egg-info/
