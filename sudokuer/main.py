@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import sys
+
 from Sudokuer import *
 
 def main( ):
@@ -9,6 +10,7 @@ def main( ):
   else:
     print( "No sudoku file specified!" )
     raise SystemExit( 1 )
+
   sdker = Sudokuer( filename )
   sdker.solve( )
 

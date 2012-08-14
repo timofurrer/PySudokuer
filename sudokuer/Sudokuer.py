@@ -1,4 +1,5 @@
 import sys
+import os
 import time
 import copy
 
@@ -13,12 +14,17 @@ class Sudokuer:
     self.filename = filename
 
   def solve( self ):
-    self.__readFile( )
+    if not self.__readFile( ):
+      return False
     self.isSolved  = False
     self.startTime = time.time( )
     self.__solve( 0, 0 )
 
   def __readFile( self ):
+    if not os.path.exists( self.filename ):
+      print( "Given sudoku file does not exists" )
+      return False
+
     self.playground = []
     f = open( self.filename, "r" )
     for l in f.readlines( ):
@@ -28,6 +34,7 @@ class Sudokuer:
       self.playground.append( row )
     f.close( )
     self.orig_playground = copy.deepcopy( self.playground )
+    return True
 
   def __solve( self, x, y ):
     if self.isSolved: return False
