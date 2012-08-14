@@ -47,27 +47,27 @@ class Sudokuer:
     if self.playground[y][x] > 0: return self.__solve( x + 1, y )
 
     for i in range( Sudokuer.MIN_NUMBER, Sudokuer.MAX_NUMBER + 1 ):
-      if not self.check( x, y, i ):
+      if not self.__check( x, y, i ):
         self.playground[y][x] = i
         if self.__solve( x + 1, y ):
-          self.solved( ) # Sudoku solved
+          self.__solved( ) # Sudoku solved
     self.playground[y][x] = 0
     return False
 
-  def check( self, x, y, value ):
-    return ( self.checkRow( y, value ) or self.checkColumn( x, value ) or self.checkBox( x, y, value ))
+  def __check( self, x, y, value ):
+    return ( self.__checkRow( y, value ) or self.__checkColumn( x, value ) or self.__checkBox( x, y, value ))
 
-  def checkRow( self, y, value ):
+  def __checkRow( self, y, value ):
     for i in range( Sudokuer.FIELD_WIDTH ):
       if self.playground[y][i] == value: return True
     return False
 
-  def checkColumn( self, x, value ):
+  def __checkColumn( self, x, value ):
     for i in range( Sudokuer.FIELD_HEIGHT ):
       if self.playground[i][x] == value: return True
     return False
 
-  def checkBox( self, x, y, value ):
+  def __checkBox( self, x, y, value ):
     box_x = int( x / 3 ) * 3
     box_y = int( y / 3 ) * 3
     for i in range( box_y, box_y + 3 ):
@@ -75,7 +75,7 @@ class Sudokuer:
         if self.playground[i][j] == value: return True
     return False
 
-  def solved( self ):
+  def __solved( self ):
     self.isSolved = True
     self.endTime  = time.time( )
     self.duration = self.endTime - self.startTime
