@@ -14,8 +14,7 @@ class Sudokuer:
 
   def solve( self ):
     self.__readFile( )
-    self.solutions = 0
-    self.isSolved = False
+    self.isSolved  = False
     self.startTime = time.time( )
     self.__solve( 0, 0 )
 
@@ -71,9 +70,8 @@ class Sudokuer:
 
   def solved( self ):
     self.isSolved = True
-    self.endTime    = time.time( )
-    self.duration   = self.endTime - self.startTime
-    self.solutions += 1
+    self.endTime  = time.time( )
+    self.duration = self.endTime - self.startTime
     print( "Found solution in %f seconds:"%( self.duration ))
     Sudokuer.printSudoku( self.playground )
 
