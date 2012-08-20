@@ -25,13 +25,8 @@ class Sudokuer:
       print( "Given sudoku file does not exists" )
       return False
 
-    self.playground = []
     f = open( self.filename, "r" )
-    for l in f.readlines( ):
-      row = []
-      for c in l[:9]:
-        row.append( int( c ))
-      self.playground.append( row )
+    self.playground = [[int( c ) for c in l[:9]] for l in f.readlines( )]
     f.close( )
     self.orig_playground = copy.deepcopy( self.playground )
     return True
