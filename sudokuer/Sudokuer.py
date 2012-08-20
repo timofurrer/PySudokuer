@@ -10,6 +10,8 @@ class Sudokuer:
   MIN_NUMBER   = 1
   MAX_NUMBER   = 9
 
+  TRIM_COLOR   = "\033[1;37m"
+
   def __init__( self, filename ):
     self.filename = filename
 
@@ -79,9 +81,15 @@ class Sudokuer:
 
   @staticmethod
   def printSudoku( playground ):
-    print( "\n+---+---+---+---+---+---+---+---+---+" )
+    print( "\n%s+---+---+---+---+---+---+---+---+---+\033[0m"%( Sudokuer.TRIM_COLOR ))
     for i in range( Sudokuer.FIELD_HEIGHT ):
-      sys.stdout.write( "|" )
+      sys.stdout.write( "%s|\033[0m"%( Sudokuer.TRIM_COLOR ))
       for j in range( Sudokuer.FIELD_WIDTH ):
-        sys.stdout.write( " %d |"%( playground[i][j] ))
-      print( "\n+---+---+---+---+---+---+---+---+---+" )
+        if ( j + 1 ) % 3 == 0:
+          sys.stdout.write( " %d %s|\033[0m"%( playground[i][j], Sudokuer.TRIM_COLOR ))
+        else:
+          sys.stdout.write( " %d |"%( playground[i][j] ))
+      if ( i + 1 ) % 3 == 0:
+        print( "\n%s+---+---+---+---+---+---+---+---+---+\033[0m"%( Sudokuer.TRIM_COLOR ))
+      else:
+        print( "\n%s+\033[0m---+---+---%s+\033[0m---+---+---%s+\033[0m---+---+---%s+\033[0m"%( Sudokuer.TRIM_COLOR, Sudokuer.TRIM_COLOR, Sudokuer.TRIM_COLOR, Sudokuer.TRIM_COLOR ))
